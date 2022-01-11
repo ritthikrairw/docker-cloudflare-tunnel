@@ -18,5 +18,5 @@ volumes:
 
 networks:
   tunnel-network:
-    external: true
-    name: host
+    driver: bridge
+    name: cloudflare-tunnel-network
