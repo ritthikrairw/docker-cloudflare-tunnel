@@ -1,18 +1,22 @@
 version: "3.8"
 services:
-  php:
-    image: cloudflare/cloudflared:2020.7.0
-    container_name: ${APP_NAME:?cloudflare-tunnel}
+  tunnel:
+    image: visibilityspots/cloudflared:latest
+    container_name: cloudflare-tunnel
     restart: unless-stopped
+    working_dir: /root
+    user: root
     volumes:
       - cloudflare-tunnel-data:/root/.cloudflared
+      - ./config.yml:/root/.cloudflared/config.yml
     networks:
       - tunnel-network
-    
+
 volumes:
   cloudflare-tunnel-data:
-    name: ${APP_NAME:?cloudflare-tunnel}-data
+    name: cloudflare-tunnel-data
 
 networks:
   tunnel-network:
-    driver: bridge
+    external: true
+    name: host
