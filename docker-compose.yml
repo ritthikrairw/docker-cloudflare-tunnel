@@ -1,0 +1,18 @@
+version: "3.8"
+services:
+  php:
+    image: cloudflare/cloudflared:2020.7.0
+    container_name: ${APP_NAME:?cloudflare-tunnel}
+    restart: unless-stopped
+    volumes:
+      - cloudflare-tunnel-data:/root/.cloudflared
+    networks:
+      - tunnel-network
+    
+volumes:
+  cloudflare-tunnel-data:
+    name: ${APP_NAME:?cloudflare-tunnel}-data
+
+networks:
+  tunnel-network:
+    driver: bridge
