@@ -19,4 +19,4 @@ volumes:
 networks:
   tunnel-network:
     external: true
-    name: host
+    name: cloudflare-tunnel
