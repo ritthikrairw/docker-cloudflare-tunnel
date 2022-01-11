@@ -9,14 +9,8 @@ services:
     volumes:
       - cloudflare-tunnel-data:/root/.cloudflared
       - ./config.yml:/root/.cloudflared/config.yml
-    networks:
-      - tunnel-network
+    network_mode: host
 
 volumes:
   cloudflare-tunnel-data:
     name: cloudflare-tunnel-data
-
-networks:
-  tunnel-network:
-    driver: bridge
-    name: cloudflare-tunnel-network
